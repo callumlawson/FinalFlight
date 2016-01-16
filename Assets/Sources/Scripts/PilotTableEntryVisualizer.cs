@@ -1,19 +1,21 @@
-﻿using Assets.Sources.GameLogic.Mood;
+﻿using System.Globalization;
+using Assets.Sources.GameLogic.Interfaces;
+using Entitas;
 using UnityEngine.UI;
 
 namespace Assets.Sources.Scripts
 {
-    public class PilotTableEntryVisualizer : UnityEngine.MonoBehaviour
+    public class PilotTableEntryVisualizer : UnityEngine.MonoBehaviour, IEntityVisualizer
     {
         public Text Name;
         public Text Helth;
         public Text Mood;
 
-        public void UpdatePilotEntry(string name, float health, Mood mood)
+        public void EntityUpdated(Entity entity)
         {
-            Name.text = name;
-            Helth.text = health.ToString();
-            Mood.text = mood.ToString();
+            Name.text = entity.name.Name;
+            Helth.text = entity.health.Health.ToString(CultureInfo.InvariantCulture);
+            Mood.text = entity.mood.Mood.ToString();
         }
     }
 }

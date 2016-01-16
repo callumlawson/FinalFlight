@@ -6,9 +6,6 @@ namespace Assets.Sources.Scripts
     {
         private static UIDirectory Instance;
 
-        public RectTransform PilotsUI;
-        public RectTransform PilotsGrid;
-
         public RectTransform EventUI;
         public RectTransform EventView;
 
