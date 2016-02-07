@@ -16,11 +16,11 @@ namespace Assets.Sources.Init
 
         public void Initialize()
         {
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 7; i++)
             {
                 systemPool.CreateEntity()
                     .AddMood(Mood.Depressed)
-                    .AddName("Bobby" + i)
+                    .AddName("Pilot Number: " + i)
                     .AddHealth(Random.value * 100);
             }
         }

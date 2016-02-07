@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assets.Sources.GameLogic.Systems;
 using Entitas;
 using Entitas.Unity.VisualDebugging;
 
@@ -22,7 +19,12 @@ namespace Assets.Sources.Init
                 .Add(pool.CreateSystem<CreatePilotsSystem>())
                 .Add(pool.CreateSystem<StartGameSystem>())
                 .Add(pool.CreateSystem<CreateEventsSystem>())
-                .Add(pool.CreateSystem<CreateAircraftSystem>());
+                .Add(pool.CreateSystem<CreateAircraftSystem>())
+                .Add(pool.CreateSystem<KeybindingSystem>())
+                .Add(pool.CreateSystem<TimeSystem>())
+                .Add(pool.CreateSystem<UINavigationSystem>())
+                .Add(pool.CreateSystem<EventPredicateCheckingSystem>())
+                .Add(pool.CreateSystem<EventResolutionSystem>());
         }
     }
 }

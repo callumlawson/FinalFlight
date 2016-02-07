@@ -6,8 +6,9 @@ namespace Assets.Sources.GameLogic.Meta
     public enum GameState
     {
         MainMenu,
-        Pilots,
-        Hangar
+        Barracks,
+        Hangar,
+        Event
     }
 
     [SingleEntity]

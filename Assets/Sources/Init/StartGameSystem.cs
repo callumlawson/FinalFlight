@@ -1,4 +1,5 @@
-﻿using Assets.Sources.GameLogic.Meta;
+﻿using Assets.Sources.GameLogic.Events;
+using Assets.Sources.GameLogic.Meta;
 using Entitas;
 
 namespace Assets.Sources.Init
@@ -9,7 +10,8 @@ namespace Assets.Sources.Init
 
         public void Initialize()
         {
-            ourPool.SetGameState(GameState.Pilots);
+            ourPool.SetGameState(GameState.MainMenu);
+            ourPool.SetTime(0);
         }
 
         public void SetPool(Pool pool)

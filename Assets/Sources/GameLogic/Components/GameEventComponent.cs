@@ -4,14 +4,6 @@ using Entitas;
 
 namespace Assets.Sources.GameLogic.Components
 {
-    public enum EventState
-    {
-        Active,
-        Removed,
-        Presented,
-        Dormant
-    }
-
     public struct EventOption
     {
         public string OptionDescription;
@@ -22,7 +14,7 @@ namespace Assets.Sources.GameLogic.Components
     {
         public string Title;
         public string Description;
-        public EventState EventState;
+        public Func<bool> Predicate;
         public List<EventOption> EventOptions;
     }
 }

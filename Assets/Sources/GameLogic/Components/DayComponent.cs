@@ -4,8 +4,8 @@ using Entitas.CodeGenerator;
 namespace Assets.Sources.GameLogic.Components
 {
     [SingleEntity]
-    public class TimeComponent : IComponent
+    public class DayComponent : IComponent
     {
-        public float Time;
+        public int Day;
     }
 }

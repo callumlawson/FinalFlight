@@ -16,13 +16,13 @@ namespace Assets.Sources.Scripts
         public void Start()
         {
             var pool = Pools.pool;
-            pool.GetGroup(Matcher.AllOf(Matcher.GameEvent)).OnEntityAdded +=
+            pool.GetGroup(Matcher.AllOf(Matcher.GameEvent, Matcher.GameEventState)).OnEntityAdded +=
                 (group, entity, index, component) => OnEventAdded(entity);
         }
 
         private void OnEventAdded(Entity entity)
         {
-            if (entity.gameEvent.EventState == EventState.Presented)
+            if (entity.gameEventState.EventState == EventState.Presented)
             {
                 UpdateEvent(entity.gameEvent.Title, entity.gameEvent.Description);
                 UiView.SetActive(true);

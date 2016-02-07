@@ -12,21 +12,21 @@ namespace Entitas {
             _gameEventComponentPool.Clear();
         }
 
-        public Entity AddGameEvent(string newTitle, string newDescription, Assets.Sources.GameLogic.Components.EventState newEventState, System.Collections.Generic.List<Assets.Sources.GameLogic.Components.EventOption> newEventOptions) {
+        public Entity AddGameEvent(string newTitle, string newDescription, System.Func<bool> newPredicate, System.Collections.Generic.List<Assets.Sources.GameLogic.Components.EventOption> newEventOptions) {
             var component = _gameEventComponentPool.Count > 0 ? _gameEventComponentPool.Pop() : new Assets.Sources.GameLogic.Components.GameEventComponent();
             component.Title = newTitle;
             component.Description = newDescription;
-            component.EventState = newEventState;
+            component.Predicate = newPredicate;
             component.EventOptions = newEventOptions;
             return AddComponent(ComponentIds.GameEvent, component);
         }
 
-        public Entity ReplaceGameEvent(string newTitle, string newDescription, Assets.Sources.GameLogic.Components.EventState newEventState, System.Collections.Generic.List<Assets.Sources.GameLogic.Components.EventOption> newEventOptions) {
+        public Entity ReplaceGameEvent(string newTitle, string newDescription, System.Func<bool> newPredicate, System.Collections.Generic.List<Assets.Sources.GameLogic.Components.EventOption> newEventOptions) {
             var previousComponent = hasGameEvent ? gameEvent : null;
             var component = _gameEventComponentPool.Count > 0 ? _gameEventComponentPool.Pop() : new Assets.Sources.GameLogic.Components.GameEventComponent();
             component.Title = newTitle;
             component.Description = newDescription;
-            component.EventState = newEventState;
+            component.Predicate = newPredicate;
             component.EventOptions = newEventOptions;
             ReplaceComponent(ComponentIds.GameEvent, component);
             if (previousComponent != null) {

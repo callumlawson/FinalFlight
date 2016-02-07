@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Assets.Sources.Scripts
 {
-    public class PilotTableEntryVisualizer : UnityEngine.MonoBehaviour, IEntityVisualizer
+    public class BarracksTableEntryVisualizer : UnityEngine.MonoBehaviour, IEntityVisualizer
     {
         public Text Name;
         public Text Helth;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Assets.Sources.Scripts
 {
-    public class AircraftTableEntryVisualizer : UnityEngine.MonoBehaviour, IEntityVisualizer
+    public class HangarTableEntryVisualizer : UnityEngine.MonoBehaviour, IEntityVisualizer
     {
         public Text Name;
         public Text Airspeed;
