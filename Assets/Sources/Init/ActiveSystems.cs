@@ -20,7 +20,7 @@ namespace Assets.Sources.Init
                 .Add(pool.CreateSystem<StartGameSystem>())
                 .Add(pool.CreateSystem<CreateEventsSystem>())
                 .Add(pool.CreateSystem<CreateAircraftSystem>())
-                .Add(pool.CreateSystem<KeybindingSystem>())
+                .Add(pool.CreateSystem<PauseSystem>())
                 .Add(pool.CreateSystem<TimeSystem>())
                 .Add(pool.CreateSystem<UINavigationSystem>())
                 .Add(pool.CreateSystem<EventPredicateCheckingSystem>())

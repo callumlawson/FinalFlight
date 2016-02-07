@@ -1,4 +1,6 @@
-﻿using Assets.Sources.GameLogic.Components;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Assets.Sources.GameLogic.Components;
 using DG.Tweening;
 using Entitas;
 using UnityEngine;
@@ -8,33 +10,60 @@ namespace Assets.Sources.Scripts
 {
     public class EventVisualizer : UnityEngine.MonoBehaviour
     {
-        public GameObject ChoiceButton;
+        public GameObject OptionButton;
         public Text Description;
         public Text Name;
         public GameObject UiView;
+        public RectTransform OptionParent;
+
+        private List<GameObject> PreviousOptions;
+        private GameEventComponent CurrentGameEvent;
 
         public void Start()
         {
+            PreviousOptions = new List<GameObject>();
             var pool = Pools.pool;
             pool.GetGroup(Matcher.AllOf(Matcher.GameEvent, Matcher.GameEventState)).OnEntityAdded +=
                 (group, entity, index, component) => OnEventAdded(entity);
         }
 
-        private void OnEventAdded(Entity entity)
+        private void OnEventAdded(Entity eventEntity)
         {
-            if (entity.gameEventState.EventState == EventState.Presented)
+            var eventEntities = Pools.pool.GetGroup(Matcher.AllOf(Matcher.GameEvent, Matcher.GameEventState)).GetEntities();
+            var possibleEventToDisplay = eventEntities.FirstOrDefault(entity => entity.gameEventState.EventState == EventState.Presented);
+
+            if (possibleEventToDisplay != null && possibleEventToDisplay.gameEvent != CurrentGameEvent)
             {
-                UpdateEvent(entity.gameEvent.Title, entity.gameEvent.Description);
+                CurrentGameEvent = possibleEventToDisplay.gameEvent;
+                UpdateEvent(possibleEventToDisplay.gameEvent);
                 UiView.SetActive(true);
+            }
+            else if (possibleEventToDisplay == null)
+            {
+                CurrentGameEvent = null;
+                UiView.SetActive(false);
             }
         }
 
-        private void UpdateEvent(string title, string description)
+        private void UpdateEvent(GameEventComponent gameEvent)
         {
             Name.text = "";
             Description.text = "";
-            Name.DOText(title, 1.0f).SetEase(Ease.Linear);
-            Description.DOText(description, 2.0f).SetEase(Ease.Linear);
+            Name.DOText(gameEvent.Title, 0.5f).SetEase(Ease.Linear);
+            Description.DOText(gameEvent.Description, 1.0f).SetEase(Ease.Linear);
+
+            PreviousOptions.ForEach(eventOption => {
+                PreviousOptions.Remove(eventOption);
+                Destroy(eventOption);
+            });
+
+            foreach (var eventOption in gameEvent.EventOptions)
+            {
+                var optionButton = Instantiate(OptionButton);
+                optionButton.GetComponent<OptionButtonVisualizer>().SetupOptionButton(eventOption);
+                optionButton.transform.SetParent(OptionParent);
+                PreviousOptions.Add(optionButton);
+            }
         }
     }
 }
